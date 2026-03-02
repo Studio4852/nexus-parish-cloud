@@ -1,6 +1,5 @@
 import {
-  LayoutDashboard, Users, CalendarDays, GraduationCap, MessageSquare, Calendar, BarChart3, Settings,
-  Church, ChevronLeft, ChevronRight, Clock, Link2, LogOut,
+  Home, Mail, User, CalendarDays, GraduationCap, Clock, Link2, LogOut, Church, ChevronLeft, ChevronRight,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useAuth } from "@/contexts/AuthContext";
@@ -10,20 +9,17 @@ import {
   SidebarMenuButton, SidebarMenuItem, SidebarHeader, SidebarFooter, useSidebar,
 } from "@/components/ui/sidebar";
 
-const mainNav = [
-  { title: "Dashboard", url: "/", icon: LayoutDashboard },
-  { title: "Members", url: "/members", icon: Users },
-  { title: "Events", url: "/events", icon: CalendarDays },
-  { title: "Cohorts", url: "/cohorts", icon: GraduationCap },
-  { title: "Rotas", url: "/rotas", icon: Clock },
-  { title: "Communication", url: "/communication", icon: MessageSquare },
-  { title: "Calendar", url: "/calendar", icon: Calendar },
-  { title: "Reports", url: "/reports", icon: BarChart3 },
-  { title: "Links", url: "/links", icon: Link2 },
-  { title: "Administration", url: "/admin", icon: Settings },
+const nav = [
+  { title: "Home", url: "/portal", icon: Home },
+  { title: "My Communication", url: "/portal/communication", icon: Mail },
+  { title: "My Details", url: "/portal/details", icon: User },
+  { title: "My Events", url: "/portal/events", icon: CalendarDays },
+  { title: "Learning", url: "/portal/learning", icon: GraduationCap },
+  { title: "My Rotas", url: "/portal/rotas", icon: Clock },
+  { title: "Links", url: "/portal/links", icon: Link2 },
 ];
 
-export function AppSidebar() {
+export function MemberSidebar() {
   const { state, toggleSidebar } = useSidebar();
   const collapsed = state === "collapsed";
   const { user, logout } = useAuth();
@@ -39,9 +35,9 @@ export function AppSidebar() {
             <Church className="w-5 h-5 text-accent-foreground" />
           </div>
           {!collapsed && (
-            <div className="animate-slide-in">
-              <h2 className="text-sm font-bold text-sidebar-accent-foreground tracking-tight leading-tight">HOTR Digital</h2>
-              <p className="text-[10px] text-sidebar-foreground/60 tracking-wider uppercase">Admin Portal</p>
+            <div>
+              <h2 className="text-sm font-bold text-sidebar-accent-foreground leading-tight">HOTR Digital</h2>
+              <p className="text-[10px] text-sidebar-foreground/60 uppercase tracking-wider">Member Portal</p>
             </div>
           )}
         </div>
@@ -51,12 +47,12 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {mainNav.map((item) => (
+              {nav.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink
                       to={item.url}
-                      end={item.url === "/"}
+                      end={item.url === "/portal"}
                       className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sidebar-foreground/80 hover:text-sidebar-accent-foreground hover:bg-sidebar-accent transition-all duration-150"
                       activeClassName="bg-sidebar-accent text-sidebar-accent-foreground font-medium"
                     >
