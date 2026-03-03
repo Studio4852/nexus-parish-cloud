@@ -38,17 +38,17 @@ interface Vow {
 
 export default function Giving() {
   const [donations, setDonations] = useState<Donation[]>([
-    { id: "1", amount: 500, type: "tithe", date: "2025-02-28", method: "card", reference: "TXN-001" },
-    { id: "2", amount: 200, type: "offering", date: "2025-02-21", method: "bank_transfer", reference: "TXN-002" },
-    { id: "3", amount: 1000, type: "special_seed", date: "2025-02-14", method: "card", reference: "TXN-003" },
+    { id: "1", amount: 50000, type: "tithe", date: "2025-02-28", method: "card", reference: "TXN-001" },
+    { id: "2", amount: 20000, type: "offering", date: "2025-02-21", method: "bank_transfer", reference: "TXN-002" },
+    { id: "3", amount: 100000, type: "special_seed", date: "2025-02-14", method: "card", reference: "TXN-003" },
   ]);
 
   const [commitments, setCommitments] = useState<Commitment[]>([
-    { id: "1", title: "Building Fund Pledge", totalAmount: 5000, paidAmount: 2000, startDate: "2025-01-01", endDate: "2025-12-31", frequency: "monthly", status: "active" },
+    { id: "1", title: "Building Fund Pledge", totalAmount: 500000, paidAmount: 200000, startDate: "2025-01-01", endDate: "2025-12-31", frequency: "monthly", status: "active" },
   ]);
 
   const [vows, setVows] = useState<Vow[]>([
-    { id: "1", title: "Annual Thanksgiving Vow", amount: 3000, dateMade: "2025-01-01", fulfilled: false, notes: "Thanksgiving service commitment" },
+    { id: "1", title: "Annual Thanksgiving Vow", amount: 300000, dateMade: "2025-01-01", fulfilled: false, notes: "Thanksgiving service commitment" },
   ]);
 
   const [showDonate, setShowDonate] = useState(false);
@@ -72,7 +72,7 @@ export default function Giving() {
     }]);
     setNewDonation({ amount: "", type: "tithe", method: "card" });
     setShowDonate(false);
-    toast({ title: "Donation Recorded", description: `£${newDonation.amount} has been recorded. Thank you!` });
+    toast({ title: "Donation Recorded", description: `₦${Number(newDonation.amount).toLocaleString()} has been recorded. Thank you!` });
   };
 
   const handleAddCommitment = () => {
@@ -122,7 +122,7 @@ export default function Giving() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="stat-card text-center">
           <DollarSign className="w-6 h-6 mx-auto text-accent mb-1" />
-          <p className="text-2xl font-bold">£{totalGiven.toLocaleString()}</p>
+          <p className="text-2xl font-bold">₦{totalGiven.toLocaleString()}</p>
           <p className="text-xs text-muted-foreground">Total Given</p>
         </div>
         <div className="stat-card text-center">
@@ -157,7 +157,7 @@ export default function Giving() {
               <h3 className="text-sm font-semibold">New Donation</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div>
-                  <Label>Amount (£)</Label>
+                  <Label>Amount (₦)</Label>
                   <Input type="number" min="1" value={newDonation.amount} onChange={e => setNewDonation(p => ({ ...p, amount: e.target.value }))} placeholder="0.00" />
                 </div>
                 <div>
@@ -185,7 +185,7 @@ export default function Giving() {
             {donations.map(d => (
               <div key={d.id} className="stat-card flex items-center justify-between">
                 <div>
-                  <p className="font-semibold text-sm">£{d.amount.toLocaleString()} — {typeLabels[d.type]}</p>
+                  <p className="font-semibold text-sm">₦{d.amount.toLocaleString()} — {typeLabels[d.type]}</p>
                   <p className="text-xs text-muted-foreground">{d.date} · {d.method.replace("_", " ")} · Ref: {d.reference}</p>
                 </div>
               </div>
@@ -206,7 +206,7 @@ export default function Giving() {
               <h3 className="text-sm font-semibold">New Commitment</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div><Label>Title</Label><Input value={newCommitment.title} onChange={e => setNewCommitment(p => ({ ...p, title: e.target.value }))} placeholder="e.g. Building Fund Pledge" /></div>
-                <div><Label>Total Amount (£)</Label><Input type="number" min="1" value={newCommitment.totalAmount} onChange={e => setNewCommitment(p => ({ ...p, totalAmount: e.target.value }))} /></div>
+                <div><Label>Total Amount (₦)</Label><Input type="number" min="1" value={newCommitment.totalAmount} onChange={e => setNewCommitment(p => ({ ...p, totalAmount: e.target.value }))} /></div>
                 <div>
                   <Label>Frequency</Label>
                   <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={newCommitment.frequency} onChange={e => setNewCommitment(p => ({ ...p, frequency: e.target.value as Commitment["frequency"] }))}>
@@ -235,7 +235,7 @@ export default function Giving() {
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <span>£{c.paidAmount.toLocaleString()} of £{c.totalAmount.toLocaleString()}</span>
+                  <span>₦{c.paidAmount.toLocaleString()} of ₦{c.totalAmount.toLocaleString()}</span>
                 </div>
                 <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden">
                   <div className="h-full bg-accent rounded-full" style={{ width: `${Math.min((c.paidAmount / c.totalAmount) * 100, 100)}%` }} />
@@ -258,7 +258,7 @@ export default function Giving() {
               <h3 className="text-sm font-semibold">New Vow</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div><Label>Title</Label><Input value={newVow.title} onChange={e => setNewVow(p => ({ ...p, title: e.target.value }))} placeholder="e.g. Thanksgiving Vow" /></div>
-                <div><Label>Amount (£)</Label><Input type="number" min="1" value={newVow.amount} onChange={e => setNewVow(p => ({ ...p, amount: e.target.value }))} /></div>
+                <div><Label>Amount (₦)</Label><Input type="number" min="1" value={newVow.amount} onChange={e => setNewVow(p => ({ ...p, amount: e.target.value }))} /></div>
                 <div className="md:col-span-2"><Label>Notes</Label><Input value={newVow.notes} onChange={e => setNewVow(p => ({ ...p, notes: e.target.value }))} placeholder="Optional context" /></div>
               </div>
               <div className="flex gap-2 justify-end">
@@ -272,7 +272,7 @@ export default function Giving() {
             {vows.map(v => (
               <div key={v.id} className="stat-card flex items-center justify-between">
                 <div>
-                  <p className="font-semibold text-sm">{v.title} — £{v.amount.toLocaleString()}</p>
+                  <p className="font-semibold text-sm">{v.title} — ₦{v.amount.toLocaleString()}</p>
                   <p className="text-xs text-muted-foreground">Made {v.dateMade}{v.notes ? ` · ${v.notes}` : ""}{v.fulfilledDate ? ` · Fulfilled ${v.fulfilledDate}` : ""}</p>
                 </div>
                 {v.fulfilled ? (
