@@ -1,5 +1,5 @@
 import {
-  Home, Mail, User, CalendarDays, GraduationCap, Clock, Link2, LogOut, Church, ChevronLeft, ChevronRight,
+  Home, Mail, User, CalendarDays, GraduationCap, Clock, Link2, LogOut, Church, ChevronLeft, ChevronRight, Heart,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useAuth } from "@/contexts/AuthContext";
@@ -15,6 +15,7 @@ const nav = [
   { title: "My Details", url: "/portal/details", icon: User },
   { title: "My Events", url: "/portal/events", icon: CalendarDays },
   { title: "Learning", url: "/portal/learning", icon: GraduationCap },
+  { title: "My Giving", url: "/portal/giving", icon: Heart },
   { title: "My Rotas", url: "/portal/rotas", icon: Clock },
   { title: "Links", url: "/portal/links", icon: Link2 },
 ];
