@@ -20,6 +20,7 @@ import Login from "./pages/Login";
 import MemberHome from "./pages/member/MemberHome";
 import MyEvents from "./pages/member/MyEvents";
 import Learning from "./pages/member/Learning";
+import Giving from "./pages/member/Giving";
 import MyRotas from "./pages/member/MyRotas";
 import MemberLinks from "./pages/member/MemberLinks";
 import MyDetails from "./pages/member/MyDetails";
@@ -47,6 +48,7 @@ function AppRoutes() {
           <Route path="/portal" element={<MemberHome />} />
           <Route path="/portal/events" element={<MyEvents />} />
           <Route path="/portal/learning" element={<Learning />} />
+          <Route path="/portal/giving" element={<Giving />} />
           <Route path="/portal/rotas" element={<MyRotas />} />
           <Route path="/portal/links" element={<MemberLinks />} />
           <Route path="/portal/details" element={<MyDetails />} />

@@ -1,11 +1,9 @@
 import { useAuth, UserRole } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { Church, Shield, Users, User } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Church, Shield, User } from "lucide-react";
 
 const roles: { role: UserRole; label: string; desc: string; icon: typeof Shield; path: string }[] = [
   { role: "super_admin", label: "Super Admin", desc: "Full system access to Admin Portal", icon: Shield, path: "/" },
-  { role: "department_admin", label: "Department Admin", desc: "Department-scoped Admin Portal", icon: Users, path: "/" },
   { role: "member", label: "Member", desc: "Access the Member Portal", icon: User, path: "/portal" },
 ];
 
